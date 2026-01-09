@@ -15,7 +15,7 @@ const ProductScreen = () => {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const { data } = await axios.get(`http://localhost:5000/api/products/${id}`);
+      const { data } = await axios.get(`https://mirza-backend-123p.onrender.com/api/products${id}`);
       setProduct(data);
     };
     fetchProduct();

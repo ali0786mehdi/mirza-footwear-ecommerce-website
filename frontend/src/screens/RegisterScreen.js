@@ -30,7 +30,7 @@ const RegisterScreen = () => {
 
       // 2. Send Register Request to Backend
       const { data } = await axios.post(
-        'http://localhost:5000/api/users',
+        'https://mirza-backend-123p.onrender.com/api/users',
         { name, email, password },
         config
       );

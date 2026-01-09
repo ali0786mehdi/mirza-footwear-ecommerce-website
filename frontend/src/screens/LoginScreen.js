@@ -19,7 +19,7 @@ const LoginScreen = () => {
 
       // Send Request to Backend
       const { data } = await axios.post(
-        'http://localhost:5000/api/users/login',
+        'https://mirza-backend-123p.onrender.com/api/users/login',
         { email, password },
         config
       );
