@@ -11,8 +11,8 @@ const startServer = async (): Promise<void> => {
     console.log(`
     ╔═══════════════════════════════════════════╗
     ║     Mirza Footwear Backend is running     ║
-    ║     Port     : ${ENV.PORT}                      ║
-    ║     Mode     : ${ENV.NODE_ENV}              ║
+    ║     Port     : ${ENV.PORT}                       ║
+    ║     Mode     : ${ENV.NODE_ENV}                ║
     ║     Health   : /health                    ║
     ╚═══════════════════════════════════════════╝
     `);
