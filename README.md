@@ -371,6 +371,20 @@ if (typeof req.body.sizes === "string") {
 }
 req.body.price = parseFloat(req.body.price)
 ```
+### Step 7 — Cart Service, Controller & Routes
+
+Built the complete shopping cart system with smart merging logic.
+
+Key decisions:
+- Cart is one document per user (unique index on user field)
+- Adding same product + same size merges quantity instead of creating duplicate
+- Price is snapshotted at time of adding — if admin changes price later, cart still shows original price
+- totalAmount auto-calculated in pre-save hook — never calculated manually
+- `/clear` route defined before `/:itemId` route — otherwise Express treats "clear" as an itemId
+
+TypeScript fixes in this step:
+- ICartItem interface needed _id?: mongoose.Types.ObjectId (same pattern as IAddress)
+- Zod v4: removed all required_error and invalid_type_error options from cart.validator.ts
 
 **TypeScript challenge resolved** — Mongoose's `.sort()` method requires `Record<string, SortOrder>` not `Record<string, unknown>`. Importing `SortOrder` from mongoose and using it as the type fixed the compiler error.
 
@@ -562,11 +576,12 @@ images          → (attach image files — max 5, max 5MB each)
 
 | Method | Endpoint | Auth | Description |
 |---|---|---|---|
-| GET | `/` | Yes | Get user's current cart |
-| POST | `/` | Yes | Add item to cart |
-| PUT | `/:itemId` | Yes | Update item quantity |
-| DELETE | `/:itemId` | Yes | Remove item from cart |
+| GET | `/` | Yes | Get full cart with populated products |
+| GET | `/count` | Yes | Get total item count for navbar badge |
+| POST | `/` | Yes | Add item — merges if same product+size |
+| PUT | `/:itemId` | Yes | Update quantity with stock validation |
 | DELETE | `/clear` | Yes | Clear entire cart |
+| DELETE | `/:itemId` | Yes | Remove single item |
 
 **Add to cart request body:**
 ```json
