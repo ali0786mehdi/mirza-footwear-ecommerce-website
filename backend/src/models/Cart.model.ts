@@ -1,6 +1,7 @@
 import mongoose, { Document, Schema } from "mongoose";
 
 export interface ICartItem {
+  _id?: mongoose.Types.ObjectId; // subdocument id for cart item
   product: mongoose.Types.ObjectId;
   size: number;
   quantity: number;

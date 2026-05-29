@@ -1,3 +1,4 @@
+import cartRoutes from "./routes/cart.routes";
 import authRoutes from "./routes/auth.routes";
 import productRoutes from "./routes/product.routes";
 import categoryRoutes from "./routes/category.routes";
@@ -44,13 +45,13 @@ app.get("/health", (_req: Request, res: Response) => {
     timestamp: new Date().toISOString(),
   });
 });
-
+ 
 // ─── API routes ───────────────────────────────────────────────────
 // We uncomment these one by one as we build each module
  app.use("/api/v1/auth", authRoutes);
  app.use("/api/v1/products", productRoutes);
  app.use("/api/v1/categories", categoryRoutes);
-// app.use("/api/v1/cart", cartRoutes);
+ app.use("/api/v1/cart", cartRoutes);
 // app.use("/api/v1/payments", paymentRoutes);
 // app.use("/api/v1/reviews", reviewRoutes);
 // app.use("/api/v1/admin", adminRoutes);
