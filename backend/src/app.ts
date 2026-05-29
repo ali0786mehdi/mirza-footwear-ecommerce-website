@@ -1,3 +1,4 @@
+import orderRoutes from "./routes/order.routes";
 import cartRoutes from "./routes/cart.routes";
 import authRoutes from "./routes/auth.routes";
 import productRoutes from "./routes/product.routes";
@@ -19,7 +20,6 @@ import "./models/Coupon.model";
 import { globalLimiter } from "./middleware/rateLimiter.middleware";
 // ─── Route imports (we'll fill these in as we build each module) ───
 // import productRoutes from "./routes/product.routes";
-// import orderRoutes from "./routes/order.routes";
 // import cartRoutes from "./routes/cart.routes";
 // import paymentRoutes from "./routes/payment.routes";
 // import reviewRoutes from "./routes/review.routes";
@@ -27,7 +27,10 @@ import { globalLimiter } from "./middleware/rateLimiter.middleware";
 // import couponRoutes from "./routes/coupon.routes";
 
 const app: Application = express();
-
+app.use((req, res, next) => {
+  console.log(`🚨 INCOMING REQUEST: ${req.method} ${req.originalUrl}`);
+  next();
+});
 // ─── Security middleware ───────────────────────────────────────────
 app.use(helmet());        // sets secure HTTP headers automatically
 app.use(cors(corsOptions)); // restrict cross-origin requests
@@ -51,6 +54,7 @@ app.get("/health", (_req: Request, res: Response) => {
  app.use("/api/v1/auth", authRoutes);
  app.use("/api/v1/products", productRoutes);
  app.use("/api/v1/categories", categoryRoutes);
+ app.use("/api/v1/orders", orderRoutes);
  app.use("/api/v1/cart", cartRoutes);
 // app.use("/api/v1/payments", paymentRoutes);
 // app.use("/api/v1/reviews", reviewRoutes);
