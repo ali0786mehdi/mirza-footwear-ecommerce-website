@@ -56,10 +56,11 @@ console.log("REGISTERING ORDER ROUTES:", typeof orderRoutes);
 app.use("/api/v1/orders", orderRoutes);
 
 // ─── 404 handler ──────────────────────────────────────────────────
+// ─── 404 handler ──────────────────────────────────────────────────
 app.use((_req: Request, res: Response) => {
   res.status(404).json({
     success: false,
-    message: "Route not found",
+    message: "GHOST BUSTED 404: Mirza API could not find this!", // <-- CHANGE THIS LINE
   });
 });
 
