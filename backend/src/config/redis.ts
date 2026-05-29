@@ -9,11 +9,10 @@ redisClient.on("connect", () => {
   console.log("Redis connected");
 });
 
-redisClient.on("error", (err) => {
+redisClient.on("error", (err: Error) => {
   console.error("Redis error:", err);
 });
 
-// Connect immediately when this file is imported
 redisClient.connect().catch(console.error);
 
 export default redisClient;

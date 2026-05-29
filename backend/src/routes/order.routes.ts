@@ -17,23 +17,29 @@ import {
 } from "../validators/order.validator";
 
 const router = Router();
-// ─── All order routes require authentication ───────────────────────
-router.use(protect);
 
-// ─── Customer routes ──────────────────────────────────────────────
-// CRITICAL: specific routes must come before parameterized routes
-// /my-orders and /stats must be defined before /:id
-// otherwise Express matches "my-orders" as an :id value
-router.get("/my-orders", getMyOrders);
-router.get("/stats", adminOnly, getOrderStats);
-router.post("/", validate(createOrderSchema), createOrder);
-router.get("/:id", getOrderById);
-router.put("/:id/cancel", cancelOrder);
+// ─── POST / — place order ─────────────────────────────────────────
+router.post("/", protect, validate(createOrderSchema), createOrder);
 
-// ─── Admin only routes ────────────────────────────────────────────
-router.get("/", adminOnly, getAllOrders);
+// ─── GET /my-orders ───────────────────────────────────────────────
+router.get("/my-orders", protect, getMyOrders);
+
+// ─── GET /stats — admin ───────────────────────────────────────────
+router.get("/stats", protect, adminOnly, getOrderStats);
+
+// ─── GET / — admin: all orders ────────────────────────────────────
+router.get("/", protect, adminOnly, getAllOrders);
+
+// ─── GET /:id ─────────────────────────────────────────────────────
+router.get("/:id", protect, getOrderById);
+
+// ─── PUT /:id/cancel ──────────────────────────────────────────────
+router.put("/:id/cancel", protect, cancelOrder);
+
+// ─── PUT /:id/status — admin ──────────────────────────────────────
 router.put(
   "/:id/status",
+  protect,
   adminOnly,
   validate(updateOrderStatusSchema),
   updateOrderStatus
