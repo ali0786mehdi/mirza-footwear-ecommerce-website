@@ -43,7 +43,7 @@ Every feature a real ecommerce website needs is implemented here.
 | Shopping Cart | ✅ Done | Add, update, remove, smart merge, auto-total |
 | Order System | ✅ Done | Place orders, inventory deduction, tax, status flow |
 | Payment Processing | ✅ Done | Razorpay integration, webhook verification |
-| Coupon System | 🔄 Step 10 | Percentage and fixed discounts |
+| Coupon System | ✅ Step 10 | Percentage and fixed discounts |
 | Review System | 🔄 Step 11 | Star ratings, auto-update product rating |
 | Admin Dashboard | 🔄 Step 12 | Sales stats, manage everything |
 | Email System | 🔄 Step 13 | SendGrid transactional emails |
